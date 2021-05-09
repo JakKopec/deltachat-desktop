@@ -11,7 +11,7 @@ tools {nodejs "nodejs"}
 				echo 'Building...'
 				sh 'npm install'
 				sh 'npm audit fix'
-				sh 'npm run build'
+				
 			}
 			post{
 				always{
@@ -24,6 +24,9 @@ tools {nodejs "nodejs"}
 			}
 		}
 		stage('Test'){
+			when{
+            	expression {currentBuild.result == null || currentBuild.result == 'SUCCESS'}
+            	}
 			steps{
 				echo 'Testing...'
 				sh 'npm run test'
