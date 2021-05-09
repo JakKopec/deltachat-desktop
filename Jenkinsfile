@@ -4,11 +4,13 @@ pipeline{
 tools {nodejs "nodejs"}
 
 	stages{
-		stage('Test')
+		stage('Test'){
 			steps{
-				echo "Testing..."
-				sh "npm run test"
-			}	
+				echo 'Testing...'
+				sh 'npm install'
+				sh 'npm run test'
+			}
+		}	
 	}
 	post{
 		always{
