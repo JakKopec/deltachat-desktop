@@ -8,14 +8,13 @@ tools {nodejs "nodejs"}
 			steps{
 				echo 'Building...'
 				sh 'npm install'
+				sh 'npm audit fix'
 				sh 'npm run build'
 		    }
 		}
 		stage('Test'){
 			steps{
 				echo 'Testing...'
-				sh 'npm install'
-				sh 'npm audit fix'
 				sh 'npm run test'
 			}
 		}	
