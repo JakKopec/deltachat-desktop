@@ -1,38 +1,42 @@
 pipeline{
 	agent any
-	
-tools {nodejs "nodejs"}
-
 	stages{
-		stage('Build'){ 
+		stage('Build'){
 			steps{
+				echo 'Pulling from origin...'
+				sh 'git pull origin master'
 				echo 'Building...'
 				sh 'npm install'
-				sh 'npm audit fix'
 				sh 'npm run build'
-		    }
+			}
+			post{
+				always{
+					emailtext attachlog: true
+					body: '${currentBuild.currentResult}: Job ${env.JOB_NAME}' build ${env.BUILD_NUMBER} 
+					recipientProviders: [developers(),requestor()]
+					subject: 'Jenkins BUILD status: ${currentBuild.currentResult}'
+					to: 'Lasiuk16@gmail.com'
+				}
+			}
 		}
-		stage('Test'){
+		stage('Test')
+			when{		
+				expression{currentBuild.result=='SUCCESS'}
+			}
 			steps{
 				echo 'Testing...'
 				sh 'npm run test'
 			}
-		}	
-	}
-	post{
-		failure{
-			emailext attachLog: true,
-				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
-				to: 'Lasiuk16@gmail.com',
-				recipientProviders: [developers(), requestor()],
-				subject: "Jenkins build failed, ${env.BUILD_NUMBER}"
+			post{
+				always{
+					emailtext attachlog: true
+					body: '${currentBuild.currentResult}: Job ${env.JOB_NAME}' build ${env.BUILD_NUMBER} 
+					recipientProviders: [developers(),requestor()]
+					subject: 'Jenkins TEST status: ${currentBuild.currentResult}'
+					to: 'Lasiuk16@gmail.com'
+				}
+			}	
 		}
-		success{
-			emailext attachLog: true,
-				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
-				to: 'Lasiuk16@gmail.com',
-				recipientProviders: [developers(), requestor()],
-				subject: "Jenkins build succeeded, ${env.BUILD_NUMBER}"
-		}		
-	}
 }
+
+
