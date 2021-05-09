@@ -24,9 +24,6 @@ tools {nodejs "nodejs"}
 			}
 		}
 		stage('Test'){
-			when{
-            	expression {currentBuild.result == null || currentBuild.result == 'SUCCESS'}
-            	}
 			steps{
 				echo 'Testing...'
 				sh 'npm run test'
