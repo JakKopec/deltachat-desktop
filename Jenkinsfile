@@ -41,4 +41,5 @@ tools {nodejs "nodejs"}
 				}
 			}	
 		}
+	}
 }
