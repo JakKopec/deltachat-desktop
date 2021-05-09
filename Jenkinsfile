@@ -16,10 +16,10 @@ pipeline{
 			post{
 				always{
 					emailext attachLog: true,
-					body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
+					body: "${currentBuild.currentResult}",
 					to: 'Lasiuk16@gmail.com',
 					recipientProviders: [developers(), requestor()],
-					subject: "Jenkins BUILD result:${currentBuild.currentResult}"
+					subject: "Jenkins: ${env.JOB_NAME} BUILD result:${currentBuild.currentResult}"
 				}
 			}
 		}
@@ -33,10 +33,10 @@ pipeline{
 			}
 			post{
 				always{
-					body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
+					body: "${currentBuild.currentResult}",
 					to: 'Lasiuk16@gmail.com',
 					recipientProviders: [developers(), requestor()],
-					subject: "Jenkins TEST result:${currentBuild.currentResult}"
+					subject: "Jenkins: ${env.JOB_NAME} TEST result:${currentBuild.currentResult}"
 				}
 			}	
 		}
