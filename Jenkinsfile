@@ -25,7 +25,7 @@ tools {nodejs "nodejs"}
 		}
 		stage('Test'){
 			when{		
-				expression{currentBuild.result=='SUCCESS'}
+				#expression{currentBuild.result=='SUCCESS'}
 			}
 			steps{
 				echo 'Testing...'
