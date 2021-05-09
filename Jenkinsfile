@@ -18,13 +18,13 @@ tools {nodejs "nodejs"}
 			emailext attachLog: true,
 				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
 				to: 'Lasiuk16@gmail.com',
-				subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
+				subject: "Jenkins build failed, ${env.BUILD_NUMBER}"
 		}
 		success{
 			emailext attachLog: true,
 				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
 				to: 'Lasiuk16@gmail.com',
-				subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
+				subject: "Jenkins build succeeded, ${env.BUILD_NUMBER}"
 		}		
 	}
 }
