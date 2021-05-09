@@ -1,5 +1,8 @@
 pipeline{
 	agent any
+	
+tools {nodejs "nd"}
+
 	stages{
 		stage('Build'){
 			steps{
@@ -19,11 +22,8 @@ pipeline{
 			emailtext attachlog: true
 			body: '${currentBuild.currentResult}: Job ${env.JOB_NAME}' build ${env.BUILD_NUMBER} 
 			recipientProviders: [developers(),requestor()]
-			subject: 'Jenkins build: ${currentBuild.currentResult}'
+			subject: 'Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}'
 			to: 'Lasiuk16@gmail.com'
-		}
-		
-		
+		}		
+	}
 }
-
-
