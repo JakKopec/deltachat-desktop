@@ -1,7 +1,7 @@
 pipeline{
 	agent any
 	
-tools {nodejs "nd"}
+	tools {nodejs "node"}
 
 	stages{
 		stage('Build'){
@@ -19,11 +19,11 @@ tools {nodejs "nd"}
 	}
 	post{
 		always{
-			emailtext attachlog: true
-			body: '${currentBuild.currentResult}: Job ${env.JOB_NAME}' build ${env.BUILD_NUMBER} 
-			recipientProviders: [developers(),requestor()]
-			subject: 'Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}'
-			to: 'Lasiuk16@gmail.com'
+			emailtext attachlog: true,
+			body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
+			to: 'Lasiuk16@gmail.com',
+			subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
+			
 		}		
 	}
 }
