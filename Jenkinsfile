@@ -15,13 +15,13 @@ tools {nodejs "nodejs"}
 	}
 	post{
 		failure{
-			emailext attachlog: true,
+			emailext attachLog: true,
 				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
 				to: 'Lasiuk16@gmail.com',
 				subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
 		}
 		success{
-			emailext attachlog: true,
+			emailext attachLog: true,
 				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
 				to: 'Lasiuk16@gmail.com',
 				subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
