@@ -9,7 +9,8 @@ tools {nodejs "nodejs"}
 				echo 'Pulling from origin...'
 				sh 'git pull origin master'
 				echo 'Building...'
-				
+				sh 'npm install'
+				sh 'npm audit fix'
 				sh 'npm run build'
 			}
 			post{
