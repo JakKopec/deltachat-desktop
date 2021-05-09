@@ -13,12 +13,17 @@ tools {nodejs "nodejs"}
 		}	
 	}
 	post{
-		always{
+		failure{
 			emailtext attachlog: true,
-			body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}",
-			to: 'Lasiuk16@gmail.com',
-			subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
-			
+				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
+				to: 'Lasiuk16@gmail.com',
+				subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
+		}
+		success{
+			emailtext attachlog: true,
+				body: "${currentBuild.currentResult}: ${currentBuild.fullDisplayName}",
+				to: 'Lasiuk16@gmail.com',
+				subject: "Jenkins build: ${currentBuild.currentResult}, ${env.BUILD_NUMBER}"
 		}		
 	}
 }
