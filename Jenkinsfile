@@ -1,7 +1,7 @@
 properties([pipelineTriggers([githubPush()])])
 pipeline{
 	agent{
-		label 'github-ci'
+		any
 	}
 	
 tools {nodejs "nodejs"}
