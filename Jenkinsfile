@@ -1,9 +1,24 @@
+properties([pipelineTriggers([githubPush()])])
 pipeline{
-	agent any
+	agent{
+		label 'github-ci'
+	}
 	
 tools {nodejs "nodejs"}
 	
 	stages{
+		stage('Checkout SCM') {
+            steps {
+                checkout([
+                 $class: 'GitSCM',
+                 branches: [[name: 'master']],
+                 userRemoteConfigs: [[
+                    url: 'git@github.com:JakKopec/deltachat-desktop.git',
+                    credentialsId: '',
+                 ]]
+                ])
+            }
+        }
 		stage('Build'){
 			steps{
 				echo 'Pulling from origin...'
