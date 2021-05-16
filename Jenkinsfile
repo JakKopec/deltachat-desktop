@@ -11,6 +11,7 @@ tools {nodejs "nodejs"}
 				echo 'Building...'
 				sh 'npm install'
 				sh 'npm audit fix'
+				sh 'npm fund'
 				sh 'npm run build'
 			}
 			post{
