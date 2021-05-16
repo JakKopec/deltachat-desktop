@@ -1,4 +1,3 @@
-properties([pipelineTriggers([githubPush()])])
 pipeline{
 	agent{
 		any
@@ -7,18 +6,6 @@ pipeline{
 tools {nodejs "nodejs"}
 	
 	stages{
-		stage('Checkout SCM') {
-            steps {
-                checkout([
-                 $class: 'GitSCM',
-                 branches: [[name: 'master']],
-                 userRemoteConfigs: [[
-                    url: 'git@github.com:JakKopec/deltachat-desktop.git',
-                    credentialsId: '',
-                 ]]
-                ])
-            }
-        }
 		stage('Build'){
 			steps{
 				echo 'Pulling from origin...'
@@ -53,5 +40,22 @@ tools {nodejs "nodejs"}
 				}
 			}	
 		}
+		stage('Deploy'){
+				steps{
+					echo 'Deploying...'
+					#sh 'docker build -t deltachat -f docker/Dockerfile_deploy .'
+				}
+				post{
+					always{
+						emailext attachLog: true,
+						body: "${env.JOB_NAME} deploy finished. Result:${currentBuild.currentResult}",
+						to: 'Lasiuk16@gmail.com',
+						recipientProviders: [developers(), requestor()],
+						subject: "Jenkins: ${env.JOB_NAME} DEPLOY result:${currentBuild.currentResult}"
+					}
+				}	
+			}
+		
+		
 	}
 }
