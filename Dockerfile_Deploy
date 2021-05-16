@@ -1,9 +1,14 @@
 FROM ubuntu:latest
+
+ENV TZ=Europe/Warsaw
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install -y build-essential
-RUN apt-get install -y byobu curl git htop man unzip wget nodejs npm
-RUN cd ~
+RUN apt-get install -y nodejs
+RUN apt-get install -y npm
+
 COPY . deltachat-desktop/
 WORKDIR deltachat-desktop
-RUN ["ls -l"]
+RUN ls
