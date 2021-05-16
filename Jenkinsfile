@@ -40,7 +40,8 @@ tools {nodejs "nodejs"}
 		stage('Deploy'){
 				steps{
 					echo 'Deploying...'
-					sh 'docker build -t deltachat -f Dockerfile_Deploy .'
+					sh 'ls -l'
+					sh 'docker build -t deltachat_deploy -f Dockerfile_Deploy .'
 				}
 				post{
 					always{
