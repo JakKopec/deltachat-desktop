@@ -41,6 +41,7 @@ tools {nodejs "nodejs"}
 				steps{
 					echo 'Deploying...'
 					sh 'ls -l'
+					sh 'service docker restart'
 					sh 'docker build -t deltachat_deploy -f Dockerfile_Deploy .'
 				}
 				post{
