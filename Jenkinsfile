@@ -10,8 +10,7 @@ tools {nodejs "nodejs"}
 				sh 'git pull origin master'
 				echo 'Building...'
 				sh 'npm install'
-				sh 'npm audit fix --force'
-				sh 'npm fund'
+				sh 'npm audit fix'
 				sh 'npm run build'
 			}
 			post{
@@ -39,21 +38,5 @@ tools {nodejs "nodejs"}
 				}
 			}	
 		}
-		stage('Deploy'){
-				steps{
-					echo 'Deploying...'
-				}
-				post{
-					always{
-						emailext attachLog: true,
-						body: "${env.JOB_NAME} deploy finished. Result:${currentBuild.currentResult}",
-						to: 'Lasiuk16@gmail.com',
-						recipientProviders: [developers(), requestor()],
-						subject: "Jenkins: ${env.JOB_NAME} DEPLOY result:${currentBuild.currentResult}"
-					}
-				}	
-			}
-		
-		
 	}
 }
