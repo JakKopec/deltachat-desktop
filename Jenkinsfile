@@ -43,7 +43,6 @@ tools {nodejs "nodejs"}
 		stage('Deploy'){
 				steps{
 					echo 'Deploying...'
-					#sh 'docker build -t deltachat -f docker/Dockerfile_deploy .'
 				}
 				post{
 					always{
