@@ -10,7 +10,10 @@ tools {nodejs "nodejs"}
 				sh 'git pull origin master'
 				echo 'Building...'
 				sh 'npm install'
+				sh 'npm audit fix'
 				sh 'npm run build'
+				
+	
 			}
 			post{
 				always{
