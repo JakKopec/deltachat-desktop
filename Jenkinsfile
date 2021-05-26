@@ -10,8 +10,6 @@ tools {nodejs "nodejs"}
 				sh 'git pull origin master'
 				echo 'Building...'
 				sh 'npm install'
-				sh 'npm audit fix --force'
-				sh 'npm fund'
 				sh 'npm run build'
 				
 	
