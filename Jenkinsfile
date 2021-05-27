@@ -46,7 +46,7 @@ tools {nodejs "nodejs"}
 					sh 'docker build -t deltachat_deploy -f Dockerfile_Deploy .'
 					sh 'docker tag deltachat_deploy jkopec/deltachat_deploy:latest'
 					sh 'docker tag deltachat_deploy jkopec/deltachat_deploy:$BUILD_NUMBER'
-					withDockerRegistry([ credenrialsId: "dockerHub", url: ""){
+					withDockerRegistry([ credenrialsId: "dockerHub", url: ""]){
 						sh 'docker push jkopec/deltachat_deploy:latest'
 						sh 'docker push jkopec/deltachat_deploy:$BUILD_NUMBER'
 					}
