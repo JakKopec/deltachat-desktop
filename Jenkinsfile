@@ -43,7 +43,7 @@ tools {nodejs "nodejs"}
 				steps{
 					echo 'Deploying...'
 					sh 'ls -l'
-					sh 'docker build --no-cache -t deltachat_deploy -f Dockerfile_Deploy .'
+					sh 'docker build -t deltachat_deploy -f Dockerfile_Deploy .'
 				}
 				post{
 					always{
