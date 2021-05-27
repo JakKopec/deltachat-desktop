@@ -44,6 +44,7 @@ tools {nodejs "nodejs"}
 					echo 'Deploying...'
 					sh 'ls -l'
 					sh 'docker build -t deltachat_deploy -f Dockerfile_Deploy .'
+					sh 'docker push jkopec/messapp-deploy'
 				}
 				post{
 					always{
